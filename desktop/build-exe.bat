@@ -9,10 +9,45 @@ echo   打包桌面版 WorkLog.exe
 echo  ============================================
 echo.
 
-set PY=C:\Users\Lenovo\.workbuddy-ai\binaries\python\envs\notebook\Scripts\python.exe
-if not exist "%PY%" (
-    echo  [错误] 未找到打包环境：%PY%
-    echo  请先创建虚拟环境并安装：pywebview pyinstaller pillow
+rem ---- 查找可用的 Python：%PY% 环境变量 > 项目内 .venv > PATH 里的 python ----
+if defined PY (
+    if exist "%PY%" goto :py_found
+    echo  [警告] 环境变量 PY 指向的路径不存在：%PY%
+)
+
+if exist "%~dp0..\.venv\Scripts\python.exe" (
+    set "PY=%~dp0..\.venv\Scripts\python.exe"
+    goto :py_found
+)
+
+for %%P in (python.exe) do if not "%%~$PATH:P"=="" set "PY=%%~$PATH:P"
+if defined PY goto :py_found
+
+where py >nul 2>nul
+if not errorlevel 1 (
+    for /f "delims=" %%P in ('py -3 -c "import sys;print(sys.executable)" 2^>nul') do set "PY=%%P"
+)
+if defined PY goto :py_found
+
+echo  [错误] 未找到 Python 解释器。
+echo.
+echo  请先安装 Python 3.10+ 并勾选 "Add Python to PATH"，然后执行：
+echo      pip install pywebview pyinstaller pillow
+echo.
+echo  或在本项目根目录创建虚拟环境：
+echo      python -m venv .venv
+echo      .venv\Scripts\pip install pywebview pyinstaller pillow
+echo.
+echo  也可以手动指定：set PY=D:\Python313\python.exe
+pause
+exit /b 1
+
+:py_found
+echo  使用 Python：%PY%
+"%PY%" -c "import webview, PyInstaller" >nul 2>nul
+if errorlevel 1 (
+    echo  [错误] 当前 Python 缺少依赖，请先安装：
+    echo      "%PY%" -m pip install pywebview pyinstaller pillow
     pause
     exit /b 1
 )
