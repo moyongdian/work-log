@@ -1,0 +1,24 @@
+{
+  "serverUrl": "",
+  "token": "",
+  "autoSave": false,
+  "autoDatePrefix": true,
+  "lastSyncAt": 0,
+  "theme": {
+    "mode": "light",
+    "accent": "#2563eb",
+    "opacity": 1.0,
+    "bgImage": "",
+    "bgBlur": 0
+  },
+  "shortcuts": {
+    "newLog": "Ctrl+N",
+    "newTree": "Ctrl+Shift+N",
+    "save": "Ctrl+S",
+    "sync": "F5",
+    "search": "Ctrl+F",
+    "settings": "Ctrl+,",
+    "toggleTheme": "Ctrl+Shift+L",
+    "exportData": "Ctrl+E"
+  }
+}
