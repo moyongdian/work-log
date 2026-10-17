@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f5f7" />
+    <title>工作日志笔记本</title>
+    <script>
+      /* 首屏渲染前先套用上次的主题，避免打开瞬间闪白 */
+      (function () {
+        try {
+          var t = JSON.parse(localStorage.getItem("nb.theme") || "null");
+          if (!t) return;
+          var r = document.documentElement;
+          r.dataset.theme = t.mode === "dark" ? "dark" : "light";
+          var hasBg = !!t.bgImage;
+          var o = typeof t.bgOpacity === "number" ? t.bgOpacity : 0.6;
+          r.style.setProperty("--bg-image", hasBg ? 'url("' + t.bgImage + '")' : "none");
+          r.style.setProperty("--bg-opacity", String(hasBg ? o : 0));
+          r.style.setProperty("--panel-opacity", String(hasBg ? 1 - o * 0.45 : 1));
+          if (hasBg) r.classList.add("has-bg");
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

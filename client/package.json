@@ -1,0 +1,26 @@
+{
+  "name": "notebook-client",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "个人工作日志笔记本系统 - 客户端（Tauri + Vue3）",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "serve:preview": "node --experimental-sqlite ../preview/server.mjs"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.12.4",
+    "marked": "^12.0.2",
+    "vue": "^3.4.38"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.4",
+    "@vitejs/plugin-vue": "^5.1.3",
+    "vite": "^5.4.3"
+  }
+}

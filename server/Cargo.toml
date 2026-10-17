@@ -1,0 +1,27 @@
+[package]
+name = "notebook-server"
+version = "1.0.0"
+edition = "2021"
+description = "个人工作日志笔记本系统 · 云端同步服务"
+
+[[bin]]
+name = "notebook-server"
+path = "src/main.rs"
+
+[dependencies]
+axum = "0.7"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "signal"] }
+sqlx = { version = "0.8", default-features = false, features = ["runtime-tokio", "mysql", "tls-rustls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tower-http = { version = "0.6", features = ["cors", "trace"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+dotenvy = "0.15"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "z"
+panic = "abort"
+strip = true

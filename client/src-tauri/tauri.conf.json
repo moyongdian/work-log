@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "WorkLog",
+  "version": "1.0.0",
+  "identifier": "com.notebook.worklog",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "工作日志笔记本",
+        "width": 1240,
+        "height": 820,
+        "minWidth": 940,
+        "minHeight": 620,
+        "resizable": true,
+        "center": true,
+        "decorations": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "copyright": "个人工作日志笔记本系统",
+    "category": "Productivity",
+    "shortDescription": "离线优先的个人工作日志笔记本",
+    "longDescription": "左侧树形分支目录 + 右侧 Markdown 日志编辑器，数据全部保存在本地 SQLite，联网后可同步到自建云服务器。",
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser"
+      }
+    }
+  }
+}
